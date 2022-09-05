@@ -1,0 +1,930 @@
+@import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap')
+
+*
+  margin: 0
+  padding: 0
+  box-sizing: border-box
+  font-family: 'Jost', sans-serif
+  border: none
+  outline: none
+  background: none
+  text-decoration: none
+  list-style: none
+
+$main: #55419A
+$pri: #F18522
+$price: #B50000
+$dark: #000000
+$light: #FFFFFF
+$para: #494949
+
+@mixin flex($justify)
+  display: flex
+  justify-content: $justify
+  align-items: center
+
+@mixin grid($columns)
+  display: grid
+  grid-template-columns: $columns
+  grid-gap: 20px
+
+@mixin image()
+  background-position: center
+  background-size: cover
+  background-repeat: no-repeat
+
+@mixin dark($opacity)
+  position: absolute
+  left: 0
+  top: 0
+  bottom: 0
+  right: 0
+  background-color: rgba($dark, $opacity)
+  pointer-events: none
+
+@mixin shrinkLabel()
+  top: -12px
+  left: 5px
+  transform: translateY(-50%) scale(.8)
+
+// @mixin btnHover()
+//   transform: scale(1.02) translateY(-1px)
+//   background-color: #DA5B64
+//   box-shadow: 0 0 4px rgba(#DA5B64, .2)
+
+@mixin trans()
+  transition: all .5s cubic-bezier(0,1,0,1)
+
+@mixin button()
+  padding: .7rem 1rem
+  color: $light
+  background-color: $light
+  box-shadow: 0 0 0 3em $main inset
+  cursor: pointer
+  font-size: 16px
+  transition: .4s
+  border: 1px solid $main
+
+  &:hover
+    color: $main
+    background-color: $light
+    box-shadow: 0 0 0 0em $main inset
+
+/***********      section      ***********/
+section
+  padding: 2rem 0
+
+  .sec-bg-img
+    @include image()
+
+/***********      wrapper      ***********/
+.wrapper
+  max-width: 1300px
+  margin: 0 auto
+  padding: 0 2rem
+
+  &.noSpace
+    max-width: auto
+    padding: 0
+
+/***********      title      ***********/
+.title
+  text-align: center
+  font-size: 30px
+  font-weight: 500
+  margin-bottom: 1.5rem
+
+/***********      Header      ***********/
+header
+  padding: 1rem 0
+  position: fixed
+  top: 0
+  left: 0
+  width: 100%
+  z-index: 10
+  background-color: rgba($dark, .7)
+  backdrop-filter: blur(5px)
+  border-radius: 0 0 20px 20px
+
+  .wrapper
+    @include flex($justify: space-between)
+
+    .logo
+      color: $light
+
+    .nav-links
+      @include flex($justify: flex-end)
+
+      .nav-btn
+        padding: 0 1rem
+        font-size: 16px
+        color: $light
+        cursor: pointer
+
+        &.active
+          color: $pri
+
+/***********      Banner      ***********/
+.banner
+  overflow: hidden
+  .swiper-slide
+    &.swiper-slide-active
+      .item
+        .details
+          h2
+            opacity: 1
+            transform: translateY(0)
+
+          h5
+            opacity: 1
+
+          button
+            opacity: 1
+            transform: translateY(0)
+
+    .item
+      @include image()
+      height: 100vh
+      position: relative
+      @include flex($justify: center)
+
+      &::before
+        content: ''
+        @include dark($opacity: .3)
+
+      .details
+        @include flex($justify: center)
+        flex-direction: column
+        color: $light
+        max-width: 600px
+        text-align: center
+
+        h2
+          font-size: 40px
+
+          transform: translateY(-100px)
+          opacity: 0
+          transition: .5s
+          transition-delay: .2s
+
+        h5
+          font-size: 20px
+          margin: 1rem
+
+          opacity: 0
+          transition: .5s
+          transition-delay: .2s
+
+        button
+          padding: .7rem 1rem
+          color: $main
+          background-color: $light
+          box-shadow: 0 0 0 0em inset $main
+          @include trans()
+          cursor: pointer
+
+          transform: translateY(100px)
+          opacity: 0
+          transition: .5s
+          transition-delay: .2s
+
+          &:hover
+            color: $light
+            background-color: $light
+            box-shadow: 0 0 0 3em inset $main
+
+/***********      about      ***********/
+.about
+  @include grid($columns: 1fr 1fr)
+  align-items: center
+
+  &.switch-sec
+    .image-sec
+      grid-area: 1
+
+  &:hover
+    .image-sec
+      img
+        transform: scale(1.4)
+
+  .text-sec
+    h2
+      font-size: 34px
+      max-width: 400px
+
+    p
+      font-weight: 400
+      font-size: 20px
+      line-height: 155.4%
+      color: $para
+      margin: 1rem 0
+
+    button
+      @include button()
+
+  .image-sec
+    overflow: hidden
+
+    img
+      height: 400px
+      width: 100%
+      object-fit: cover
+      transition: .8s
+
+/***********      Header      ***********/
+.country-package
+  display: grid
+  grid-template-areas: 'item1 item1 item2 item3' 'item1 item1 item4 item5' 'item6 item7 item7 item8' 'item6 item7 item7 item8'
+  gap: 10px
+
+  .item
+    @include image()
+    position: relative
+
+    &::before
+      content: ''
+      @include dark($opacity: .1)
+      background-image: linear-gradient(0deg, rgba($dark, .4), rgba($dark, .1) )
+
+    .package
+      position: absolute
+      top: 10px
+      right: 10px
+      padding: .3rem .6rem
+      border-radius: 5px
+      background-color: $pri
+      color: $dark
+      font-size: 12px
+      font-weight: 500
+
+    .name
+      position: absolute
+      bottom: 10px
+      left: 10px
+      font-size: 18px
+      color: $light
+
+    &:nth-child(1)
+      grid-area: item1
+      height: 400px
+
+    &:nth-child(2)
+      grid-area: item2
+
+    &:nth-child(3)
+      grid-area: item3
+
+    &:nth-child(4)
+      grid-area: item4
+
+    &:nth-child(5)
+      grid-area: item5
+
+    &:nth-child(6)
+      grid-area: item6
+      height: 400px
+
+    &:nth-child(7)
+      grid-area: item7
+
+    &:nth-child(8)
+      grid-area: item8
+
+/***********      special-package      ***********/
+.special-package
+  .list
+    @include grid($columns: 1fr 1fr 1fr)
+
+    .item
+      box-shadow: 0 4px 20px rgba($dark, .1)
+      background-color: $light
+
+      &:hover
+        .image-sec
+          img
+            transform: scale(1.1)
+
+      .image-sec
+        height: 230px
+        width: 100%
+        overflow: hidden
+
+        img
+          height: 100%
+          width: 100%
+          @include trans()
+
+      .text-sec
+        padding: 1rem
+
+        .days
+          padding: .2rem .4rem
+          background-color: $pri
+          font-size: 12px
+          display: inline-block
+          color: $dark
+
+        .name
+          font-size: 18px
+          font-weight: 500
+          color: $main
+
+        .price
+          font-size: 20px
+          color: $price
+
+          span
+            font-size: 14px
+            font-weight: 400
+            color: #2D0000
+
+        p
+          padding: .1rem 0 1rem
+          font-weight: 400
+          font-size: 16px
+          line-height: 152.9%
+          color: $para
+
+        button
+          @include button()
+          padding: .3rem 1rem
+
+/***********      adventure-ideas      ***********/
+.adventure-ideas
+  .list
+    @include grid($columns: 1fr 1fr 1fr 1fr)
+
+    .item
+      @include flex($justify: center)
+      flex-direction: column
+
+      .image-sec
+        height: 200px
+        width: 200px
+        border-radius: 50%
+        overflow: hidden
+        margin-bottom: 10px
+
+        img
+          height: 100%
+          width: 100%
+          object-fit: cover
+
+      .text-sec
+        text-align: center
+
+        .name
+          font-size: 18px
+          font-weight: 600
+
+        p
+          margin: .5rem 0 1rem
+          font-weight: 400
+          font-size: 16px
+          line-height: 117.4%
+          color: $para
+
+        button
+          @include button()
+          padding: .5rem 1rem
+
+/***********      explore-activities      ***********/
+.explore-activities
+  overflow: hidden
+
+  .list
+    @include grid($columns: 1fr 1fr 1fr 1fr)
+
+  .item
+    background-color: $light
+
+    .image-sec
+      height: 200px
+      width: 100%
+      overflow: hidden
+
+      img
+        height: 100%
+        width: 100%
+        object-fit: cover
+
+    .text-sec
+      border: 1px solid rgba($dark, .5)
+      padding: .7rem
+
+      .name
+        color: $dark
+
+      .price
+        color: $price
+
+/***********      gallery      ***********/
+.gallery
+  .list
+    @include grid($columns: 1fr 1fr 1fr 1fr)
+
+    .item
+      img
+        height: 180px
+        width: 100%
+        object-fit: cover
+
+/***********      testinomial      ***********/
+.testinomial
+  max-width: 1000px
+  margin: 0 auto
+  overflow: hidden
+
+  .mySwiper
+    position: relative
+    height: 100%
+    width: 100%
+
+    .swiper-button-next
+      &:hover
+        transform: scale(1.05) translateX(4px)
+
+    .swiper-button-prev
+      &:hover
+        transform: scale(1.05) translateX(-4px)
+
+    .swiper-button-next, .swiper-button-prev
+      @include flex($justify: center)
+      @include trans()
+
+      img
+        height: 30px
+        width: 30px
+
+      &::after
+        display: none
+
+  .item
+    @include flex($justify: center)
+    flex-direction: column
+    text-align: center
+    padding: 0 12rem
+
+    .image-sec
+      height: 100px
+      width: 100px
+      overflow: hidden
+      border-radius: 50%
+
+      img
+        height: 100%
+        width: 100%
+        object-fit: cover
+
+    .text-sec
+      text-align: center
+      .desc
+        font-size: 16px
+        color: $para
+        line-height: 1.5rem
+        margin: 1rem 0
+
+      .name
+        font-size: 18px
+        font-weight: 600
+
+      .post
+        color: $main
+        font-size: 16px
+        font-weight: 600
+
+/***********      footer      ***********/
+footer
+  padding: 3rem 0 2rem
+  @include image()
+  position: relative
+
+  &::before
+    content: ''
+    @include dark($opacity: .8)
+
+  .footer-list
+    @include grid($columns: 1fr 1fr 1fr 1fr)
+    position: relative
+    z-index: 2
+
+    .item
+      color: $light
+
+      .logo, .f-title
+        margin-bottom: 1rem
+
+      .f-title
+        font-size: 24px
+        font-weight: 500
+
+      ul
+        li
+          padding: .4rem 0
+
+          a
+            color: $light
+            width: 100%
+
+      .desc
+        font-size: 16px
+        line-height: 163.4%
+
+  .copyright
+    position: relative
+    padding-top: 2rem
+    margin-top: 2rem
+    border-top: 1px solid #ADADAD
+    color: $light
+    z-index: 2
+    @include flex($justify: space-between)
+
+    .icons
+      @include flex($justify: flex-end)
+
+      .icon
+        padding: 0 1rem
+
+        a
+          color: $light
+
+/***********      page-banner      ***********/
+.page-banner
+  height: 50vh
+  @include image()
+  @include flex($justify: center)
+  position: relative
+
+  &::before
+    content: ''
+    @include dark($opacity: .3)
+    z-index: 1
+
+  .page-title
+    position: relative
+    margin-top: 2rem
+    color: $light
+    z-index: 2
+    text-align: center
+
+    h2
+      font-size: 40px
+
+    h4
+      font-size: 20px
+      font-weight: 400
+      cursor: pointer
+
+      a
+        color: $light
+
+/***********      about-page      ***********/
+.about-page
+  .section
+    @include grid($columns: 1fr 1.5fr)
+
+    .text-sec
+      .sec-title
+        color: $main
+        font-size: 24px
+        font-weight: 500
+        margin-bottom: 10px
+
+      p
+        font-size: 17px
+        color: $para
+        margin-bottom: 1rem
+        line-height: 1.5rem
+
+    .image-sec
+      height: 530px
+      width: 100%
+      position: relative
+
+      img
+        position: absolute
+        object-fit: cover
+
+        &:nth-child(1)
+          top: 0
+          left: 0
+          height: 197px
+          width: 44%
+          border-radius: 30px 0 30px 0
+          z-index: 1
+
+        &:nth-child(2)
+          top: 0
+          right: 0
+          height: 315px
+          width: 53%
+          border-radius: 0 30px 0 0
+          z-index: 2
+
+        &:nth-child(3)
+          bottom: 0
+          left: 0
+          height: 315px
+          width: 53%
+          border-radius: 0 0 0 30px
+          z-index: 1
+
+        &:nth-child(4)
+          bottom: 0
+          right: 0
+          height: 197px
+          width: 44%
+          border-radius: 30px 0 30px 0
+          z-index: 1
+
+/***********      blog      ***********/
+.blog
+  .list
+    @include grid($columns: 1fr 1fr)
+
+    .item
+      position: relative
+
+      &:hover
+        .image
+          .img
+            transform: scale(1.1)
+            transition: transform 6s cubic-bezier(0.25, 0.45, 0.45, 0.95)
+
+      .image
+        height: 400px
+        width: 100%
+        overflow: hidden
+
+        .img
+          height: 100%
+          width: 100%
+          @include image()
+
+      .details
+        position: absolute
+        left: 0
+        top: 0
+        max-width: 350px
+        width: 100%
+        background-color: rgba($dark, .55)
+        backdrop-filter: blur(4px)
+        padding: 1rem
+        color: $light
+
+        .date-time
+          @include flex($justify: flex-start)
+
+          .date
+            text-align: center
+
+            .day
+              font-size: 20px
+
+            .month
+              font-size: 14px
+              text-transform: uppercase
+              font-weight: 300
+
+          .line
+            height: 40px
+            width: 1px
+            background-color: $light
+            margin: 0 1rem
+
+          .time
+            .hrs
+              margin-bottom: 6px
+            .hrs, .loc
+              font-size: 14px
+              @include flex($justify: flex-start)
+              font-weight: 300
+
+              i
+                margin-right: 6px
+                font-size: 13px
+
+        .name
+          margin: 1rem 0 .6rem
+          font-weight: 500
+          font-size: 15px
+
+        p
+          font-size: 13px
+          font-weight: 300
+          margin-bottom: 1rem
+          line-height: 1.2rem
+          letter-spacing: 1px
+          max-height: 80px
+          overflow-y: auto
+
+        button
+          @include button()
+          padding: .4rem .7rem
+
+/***********      contact-page      ***********/
+.contact-page
+  .title
+    font-size: 24px
+    color: $main
+    text-align: left
+
+  .section
+    @include grid($columns: 2fr 1fr)
+
+    .form-section
+      .groups
+        @include grid($columns: 1fr 1fr)
+
+      .group
+        position: relative
+        border: 1px solid rgba($dark, .3)
+        margin-bottom: 2rem
+        border-radius: 20px
+
+        label
+          position: absolute
+          top: 0
+          left: 15px
+          transform: translateY(-50%)
+          background-color: $light
+          border: 1px solid rgba($dark, .3)
+          padding: .2rem .8rem
+          font-size: 13px
+          color: $para
+          border-radius: 20px
+
+        input, textarea
+          padding: 1rem
+          font-size: 16px
+          width: 100%
+
+        textarea
+          height: 100px
+
+      button
+        @include button()
+        border-radius: 20px
+
+    .info-section
+      color: $light
+      padding: 2rem
+      border-radius: 20px
+      background: linear-gradient(221.31deg, #8B75D9 0%, #55419A 100%)
+
+      .title
+        color: $light
+        font-size: 30px
+
+      ul
+        li
+          margin-bottom: 1.5rem
+          @include flex($justify: flex-start)
+
+          i
+            height: 40px
+            width: 40px
+            border-radius: 50%
+            background-color: $light
+            color: $main
+            @include flex($justify: center)
+            margin-right: 10px
+            font-size: 16px
+
+          span
+            width: 80%
+            font-size: 16px
+
+      .icon-list
+        @include flex($justify: space-around)
+        margin-top: 2rem
+
+        i
+          height: 40px
+          width: 40px
+          border-radius: 50%
+          background-color: $light
+          color: $main
+          @include flex($justify: center)
+          margin-right: 10px
+          font-size: 16px
+
+.blog-details-page
+  padding: 4rem 0
+
+  .wrapper
+    display: grid
+    grid-template-columns: 2fr 1fr
+    grid-gap: 30px
+
+  .image
+    height: 400px
+    overflow: hidden
+    margin-bottom: 1rem
+
+    .img
+      height: 100%
+      width: 100%
+      @include image()
+
+  .details
+    .name
+      font-size: 26px
+      font-weight: 600
+      line-height: 1.7rem
+      margin-bottom: 1rem
+
+    .desc
+      color: $para
+      font-size: 15px
+      line-height: 1.5rem
+
+    .profile
+      @include flex($justify: center)
+
+      justify-content: flex-start
+      margin: 2rem 0
+
+      .profile-img
+        height: 50px
+        width: 50px
+        border-radius: 50%
+        margin-right: 1rem
+        @include image()
+
+      .profile-detaile
+        color: $dark
+
+        .username
+          font-size: 16px
+          font-weight: 600
+
+        .time
+          font-size: 14px
+
+  .others-infos
+    margin: 2rem 0
+    .name
+      font-size: 22px
+      font-weight: 600
+      margin-bottom: 0.6rem
+
+    .desc
+      margin-bottom: 0.6rem
+      font-size: 15px
+      line-height: 1.5rem
+      color: $para
+
+    ul
+      margin: 0 0 0 30px
+
+      li
+        list-style: decimal
+        line-height: 2rem
+        margin-bottom: 0.6rem
+        font-size: 15px
+        line-height: 1.5rem
+        color: $para
+
+        strong
+          color: $dark
+
+  .recent-post
+    position: sticky
+    top: 0
+
+    .title
+      font-size: 24px
+      margin-bottom: 10px
+
+    .list
+      margin-top: 1rem
+      .item
+        @include flex($justify: center)
+        justify-content: flex-start
+        margin-bottom: 1rem
+        box-shadow: 3px 3px 10px rgba($dark, 0.14)
+        transition: 0.3s
+
+        &:hover
+          transform: translateY(-5px)
+          box-shadow: 3px 10px 10px rgba($dark, 0.14)
+
+        .recent-image
+          height: 80px
+          width: 30%
+
+          .img
+            width: 100%
+            height: 100%
+            @include image()
+
+        .name
+          font-size: 14px
+          font-weight: 500
+          width: 70%
+          padding: .5rem 0
+          padding-left: 5px
+
+          a
+            color: $dark
